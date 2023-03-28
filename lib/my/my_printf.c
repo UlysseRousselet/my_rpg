@@ -19,7 +19,8 @@ int (*funct_flag[])(const char *, int *) = {type_zero,
 
 char *arg_type = "sdicu%obxXefgnpEFm";
 char *flag_tab = "0+- #";
-int my_printf2(int *i, int *count, const char *format, va_list list)
+
+void my_printf2(int *i, int *count, const char *format, va_list list)
 {
     int x = 1;
     int z = 0;
@@ -36,7 +37,7 @@ int my_printf2(int *i, int *count, const char *format, va_list list)
     }
     if ( z == 0)
         my_putchar(format[*i]);
-    *count++;
+    ++*count;
 }
 
 int my_printf(const char *format, ...)

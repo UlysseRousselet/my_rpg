@@ -10,6 +10,7 @@
 
 void str_hex2(const char *format, va_list list, int *i, int *count)
 {
+    (void)format; (void)count;
     char hexa[30000]; int a;
     int j = 0; long deci;
     long quotient; long reste;
@@ -31,7 +32,7 @@ void str_hex2(const char *format, va_list list, int *i, int *count)
 
 void str_float(const char *format, va_list list, int *i, int *count)
 {
-    double nbr = va_arg(list, double);
+    double nbr = va_arg(list, double); (void)format; (void) count;
     if (nbr < 0)
         nbr -= 0.0000005;
     else
@@ -55,11 +56,13 @@ void str_float(const char *format, va_list list, int *i, int *count)
 
 void str_g(const char *format, va_list list, int *i, int *count)
 {
+    (void)format; (void) count;
     double nbr = va_arg(list, double); double nbr2 = nbr;
     int avantvirgule = nbr; int apvirgule = 0;
     int dav = 0; int dap = 0;
     for (int y = 10; nbr > 0 && y != 10000000; y *= 10)
-        nbr -= y; dav++;
+        nbr -= y;
+    dav++;
     dap = 6 - dav;
     double nbr3 = nbr2 - avantvirgule;
     for (int r = 0; r < dap; r++)
@@ -77,6 +80,7 @@ void str_g(const char *format, va_list list, int *i, int *count)
 
 void str_n(const char *format, va_list list, int *i, int *count)
 {
+    (void)format; (void) count;
     int *a = va_arg(list, int*);
     *a = *i;
     *i = *i + 1;
@@ -84,6 +88,7 @@ void str_n(const char *format, va_list list, int *i, int *count)
 
 void str_p(const char *format, va_list list, int *i, int *count)
 {
+    (void) format; (void) count;
     void *ptr;
     ptr = va_arg(list, void*);
     unsigned long long result = (unsigned long long)ptr;

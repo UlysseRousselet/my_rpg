@@ -14,6 +14,8 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+    #include <stdbool.h>
+    #include <stdarg.h>
     #include <ucontext.h>
     #include <SFML/Audio.h>
     #include <SFML/Graphics.h>
@@ -29,7 +31,7 @@ typedef struct Vertices {
     int y_to_screen;
 } Vertices;
 
-typedef struct Player {
+typedef struct Camera_3d {
     int last_mouse_pos_x;
     int last_mouse_pos_y;
     int sensivity;
@@ -44,15 +46,23 @@ typedef struct Player {
     int gauche;
     int monter;
     int descendre;
-} Player;
+} Camera_3d;
 
-typedef struct env {
-    Player *player;
+typedef struct Env_3d {
+    Camera_3d *camera;
     Vertices *vertices;
     sfVector2i middle_of_screen;
     sfConvexShape *plateform[2];
+    sfRectangleShape *sky_box;
+    sfVector2f sky_box_size;
     int nbr_vertices;
-} env;
+} Env_3d;
+
+typedef struct ALL {
+    Env_3d *env_3d;
+    bool is_in_fight;
+    sfRenderWindow* window;
+} ALL;
 
 int my_printf(const char *format, ...);
 int my_show_word_array(char * const *tab);
@@ -112,13 +122,19 @@ void str_e2(const char *format, va_list list, int *i, int *count);
 void str_float2(const char *format, va_list list, int *i, int *count);
 void str_m(const char *format, va_list list, int *i, int *count);
 char **malloc_2d_array(int y, int x);
-void set_up(env *env, Player *player);
-void event_fct(sfRenderWindow *window, sfEvent event, env *env);
-void create_line(env *env);
-void get_angle_horizontal(Vertices *v, Player *p);
-void set_vertices_x_to_screen(Vertices *v, Player *p);
-void get_angle_vertical(Vertices *v, Player *p);
-void set_verticles_y_to_screen(Vertices *v, Player *p);
-void set_convex_shap(env *env, sfRenderWindow *window);
+void set_up(ALL *all);
+void event_fct(sfRenderWindow *window, sfEvent event, Env_3d *env);
+void create_line(Env_3d *env);
+void get_angle_horizontal(Vertices *v, Camera_3d *p);
+void set_vertices_x_to_screen(Vertices *v, Camera_3d *p);
+void get_angle_vertical(Vertices *v, Camera_3d *p);
+void set_verticles_y_to_screen(Vertices *v, Camera_3d *p);
+void print_3D(Env_3d *env, sfRenderWindow *window);
+void create_vertices(Env_3d *env);
+void create_line(Env_3d *env_3d);
+void set_up_3d_scene(ALL *all);
+void main_battle_3d(sfRenderWindow *window, sfEvent event, ALL *all);
+void print_3D_scene(sfRenderWindow *window, Env_3d *env);
+void calcul_3D(Env_3d *env);
 
 #endif

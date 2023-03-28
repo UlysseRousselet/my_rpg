@@ -10,8 +10,8 @@
 
 void str_e2(const char *format, va_list list, int *i, int *count)
 {
-    double deci = va_arg(list, double); int a = 0;
-    while (deci >= 10 || deci <= 1 && deci != 0) {
+    double deci = va_arg(list, double); int a = 0; (void) format; (void) count;
+    while (deci >= 10 || (deci <= 1 && deci != 0)) {
         if (deci >= 10) {
             deci = deci / 10; a++;
         }
@@ -34,7 +34,7 @@ void str_e2(const char *format, va_list list, int *i, int *count)
 
 void str_float2(const char *format, va_list list, int *i, int *count)
 {
-    double nbr = va_arg(list, double);
+    double nbr = va_arg(list, double); (void) format; (void) count;
     if (nbr < 0)
         nbr -= 0.0000005;
     else
@@ -58,5 +58,9 @@ void str_float2(const char *format, va_list list, int *i, int *count)
 
 void str_m(const char *format, va_list list, int *i, int *count)
 {
+    (void) format;
+    (void) list;
+    (void) i;
+    (void) count;
     my_putstr("Success");
 }

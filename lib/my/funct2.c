@@ -10,11 +10,12 @@
 
 void str_unsint(const char *format, va_list list, int *i, int *count)
 {
+    (void) format;
     int b = va_arg(list, int);
     if (b < 0) {
-        b = 4294967296 + b;
+        b = 2147483647 + b;
     }
-    if (b > 4294967295)
+    if (b > 2147483647)
         my_putchar('0');
     my_put_unsnbr(b);
     *count += my_get_nbr_2(b);
@@ -23,9 +24,9 @@ void str_unsint(const char *format, va_list list, int *i, int *count)
 
 void str_oct(const char *format, va_list list, int *i, int *count)
 {
+    (void) format; (void) count;
     char hexa[30000];
-    int a = 0;
-    int j = 0;
+    int a = 0; int j = 0;
     unsigned long long deci = 0;
     unsigned long long quotient = 0;
     unsigned long long reste = 0;
@@ -47,6 +48,7 @@ void str_oct(const char *format, va_list list, int *i, int *count)
 
 void str_bin(const char *format, va_list list, int *i, int *count)
 {
+    (void) format; (void) count;
     int bin[30000];
     int j = 0;
     int a = 1;
@@ -70,9 +72,9 @@ void str_bin(const char *format, va_list list, int *i, int *count)
 
 void str_hex(const char *format, va_list list, int *i, int *count)
 {
+    (void) format; (void) count;
     char hexa[30000];
-    int a = 0;
-    int j = 0;
+    int a = 0; int j = 0;
     unsigned long long deci = 0;
     unsigned long long quotient = 0;
     unsigned long long reste = 0;
@@ -94,8 +96,8 @@ void str_hex(const char *format, va_list list, int *i, int *count)
 
 void str_e(const char *format, va_list list, int *i, int *count)
 {
-    double deci = va_arg(list, double); int a = 0;
-    while (deci >= 10 || deci <= 1 && deci != 0) {
+    double deci = va_arg(list, double); int a = 0; (void)format; (void)count;
+    while (deci >= 10 || (deci <= 1 && deci != 0)) {
         if (deci >= 10) {
             deci = deci / 10; a++;
         }

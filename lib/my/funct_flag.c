@@ -10,17 +10,23 @@
 
 int type_zero(const char *format, int *i)
 {
+    (void) format;
+    (void) i;
     return 2;
 }
 
 int type_plus(const char *format, int *i)
 {
+    (void) format;
+    (void) i;
     my_putchar('+');
     return 2;
 }
 
 int type_moin(const char *format, int *i)
 {
+    (void) format;
+    (void) i;
     return 2;
 }
 
@@ -35,5 +41,7 @@ int type_space(const char *format, int *i)
 
 int type_hashtag(const char *format, int *i)
 {
+    (void) format;
+    (void) i;
     return 2;
 }

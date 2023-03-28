@@ -7,44 +7,25 @@
 
 #include "my.h"
 
-void calcul_vertices(env *env)
-{
-    for (int i = 0; i < env->nbr_vertices; i++) {
-        get_angle_vertical(&env->vertices[i], env->player);
-        set_verticles_y_to_screen(&env->vertices[i], env->player);
-        get_angle_horizontal(&env->vertices[i], env->player);
-        set_vertices_x_to_screen(&env->vertices[i], env->player);
-    }
-}
-
-void game_loop(sfRenderWindow *window, sfEvent event, env *env)
+void game_loop(sfRenderWindow *window, sfEvent event, ALL *all)
 {
     while (sfRenderWindow_isOpen(window)) {
-        event_fct(window, event, env);
-
-        calcul_vertices(env);
-
-        sfRenderWindow_clear(window, sfBlack);
-
-        set_convex_shap(env, window);
-        
-        sfRenderWindow_display(window);
+        all->is_in_fight = true;
+        if (all->is_in_fight == false) {
+            ;
+        } else {
+            main_battle_3d(window, event, all);
+        }
     }
 }
 
 int main(void)
 {
-    sfVideoMode mode = {1920, 1080, 32};
-    sfRenderWindow* window;
     sfEvent event;
-    env env;
-    Player player;
-    set_up(&env, &player);
-    create_line(&env);
-    window = sfRenderWindow_create(mode, "3D test", sfResize | sfClose, NULL);
-    sfRenderWindow_setMouseCursorVisible(window, sfFalse);
-    sfRenderWindow_setFramerateLimit(window, 60);
-    game_loop(window, event, &env);
-    sfRenderWindow_destroy(window);
+    ALL all;
+    set_up(&all);
+    sfRenderWindow_setFramerateLimit(all.window, 60);
+    game_loop(all.window, event, &all);
+    sfRenderWindow_destroy(all.window);
     return EXIT_SUCCESS;
 }

@@ -12,7 +12,6 @@
 int my_get_nbr_2(int nb)
 {
     int compteur = 0;
-    int y = 0;
     if (nb >= -2147483647 && nb < 0) {
         compteur++;
         nb = nb * (- 1);
@@ -21,7 +20,6 @@ int my_get_nbr_2(int nb)
         compteur++;
         return compteur;
     }
-    y = nb % 10;
     if (nb > 0 && nb <= 2147483647) {
         compteur ++;
         compteur += my_get_nbr_2(nb / 10);
@@ -31,6 +29,7 @@ int my_get_nbr_2(int nb)
 
 void str_str(const char *format, va_list list, int *i, int *count)
 {
+    (void) format;
     char *a = va_arg(list, char*);
     my_putstr(a);
     *count += my_strlen(a);
@@ -39,13 +38,16 @@ void str_str(const char *format, va_list list, int *i, int *count)
 
 void str_char(const char *format, va_list list, int *i, int *count)
 {
+    (void) format;
+    (void) list;
     my_putchar(va_arg(list, int));
     *i = *i + 1;
-    *count++;
+    ++*count;
 }
 
 void str_mod(const char *format, va_list list, int *i, int *count)
 {
+    (void) list;
     my_putchar('%');
     if (format[*i - 1] == '%')
         ++*i;
@@ -55,6 +57,7 @@ void str_mod(const char *format, va_list list, int *i, int *count)
 
 void str_int(const char *format, va_list list, int *i, int *count)
 {
+    (void) format;
     int b = va_arg(list, int);
     if (b == 0)
         my_putstr("0");

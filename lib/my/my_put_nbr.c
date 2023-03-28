@@ -9,7 +9,7 @@
 
 void my_putchar(char c);
 
-int my_put_nbr(int nb)
+void my_put_nbr(int nb)
 {
     int y = 0;
     if (nb >= -2147483647 && nb < 0) {
@@ -18,7 +18,7 @@ int my_put_nbr(int nb)
     }
     if (nb < -2147483647 || nb > 2147483647){
         my_putchar('0');
-        return 0;
+        return;
     }
     y = nb % 10;
     if (nb > 0 && nb <= 2147483647) {

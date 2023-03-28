@@ -28,4 +28,5 @@ int my_put_nbr_virgule(int nb, int virgule)
         my_put_nbr(virgule);
         my_putchar(48 + y);
     }
+    return 0;
 }

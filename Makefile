@@ -7,16 +7,19 @@
 
 CC	=	gcc
 
-SRC	=	src/main.c						\
-		src/event.c						\
-		src/set_up.c					\
-		src/calcul_3d.c
+SRC	=	src/main.c									\
+		src/set_up_global.c							\
+		src/3d_scene/3d_main.c						\
+		src/3d_scene/event_3d.c						\
+		src/3d_scene/calcul_3d.c					\
+		src/3d_scene/print_3d.c					\
+		src/3d_scene/set_up_3d.c
 
 OBJ     = 	$(SRC:.c=.o)
 
 TEMP	=	*.gcda *.gcno *.gch
 
-NAME	=	3D_test
+NAME	=	my_rpg
 
 LFLAGS	= 	-lcsfml-graphics -lcsfml-window 					\
 			-lcsfml-system -lcsfml-audio -L lib/my/ -lmy -lm

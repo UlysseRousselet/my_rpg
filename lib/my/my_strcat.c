@@ -12,7 +12,6 @@
 char *my_strcat(char *dest, char const *src)
 {
     int count;
-    int y;
     count = my_strlen(dest);
     int i = 0;
     for (i = 0; src[i] != '\0'; i++) {

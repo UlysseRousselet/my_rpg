@@ -10,9 +10,11 @@
 
 char **malloc_2d_array(int y, int x)
 {
-    char **tab = malloc(sizeof(char*) * y);
-    for (int i = 0; i < y; i++) {
-        tab[i] = malloc(sizeof(char) * x);
+    char **tab = malloc(sizeof(char*) * (y + 1));
+    int i = 0;
+    for (i = 0; i < y; i++) {
+        tab[i] = malloc(sizeof(char) * (x + 1));
     }
+    tab[y] = NULL;
     return tab;
 }
