@@ -7,9 +7,6 @@
 
 #ifndef MY_H_
     #define MY_H_
-    #define PI 3.14159
-    #include <signal.h>
-    #include <sys/types.h>
     #include <unistd.h>
     #include <stdio.h>
     #include <stdlib.h>
@@ -20,43 +17,7 @@
     #include <SFML/Audio.h>
     #include <SFML/Graphics.h>
     #include <math.h>
-
-typedef struct Vertices {
-    int x;
-    int y;
-    int z;
-    double angle_relativ_player_hori;
-    double angle_relativ_player_vertic;
-    int x_to_screen;
-    int y_to_screen;
-} Vertices;
-
-typedef struct Camera_3d {
-    int last_mouse_pos_x;
-    int last_mouse_pos_y;
-    int sensivity;
-    double angle_horiz;
-    double angle_vertic;
-    double x;
-    double y;
-    double z;
-    int avancer;
-    int reculer;
-    int droite;
-    int gauche;
-    int monter;
-    int descendre;
-} Camera_3d;
-
-typedef struct Env_3d {
-    Camera_3d *camera;
-    Vertices *vertices;
-    sfVector2i middle_of_screen;
-    sfConvexShape *plateform[2];
-    sfRectangleShape *sky_box;
-    sfVector2f sky_box_size;
-    int nbr_vertices;
-} Env_3d;
+    #include "3D.h"
 
 typedef struct ALL {
     Env_3d *env_3d;

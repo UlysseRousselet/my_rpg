@@ -7,15 +7,13 @@
 
 #include "my.h"
 
-void game_loop(sfRenderWindow *window, sfEvent event, ALL *all)
+void game_loop(sfEvent event, ALL *all)
 {
-    while (sfRenderWindow_isOpen(window)) {
-        all->is_in_fight = true;
-        if (all->is_in_fight == false) {
-            ;
-        } else {
-            main_battle_3d(window, event, all);
-        }
+    while (all->is_in_fight == false && sfRenderWindow_isOpen(all->window))
+    ; // deplacement sur la map en 2D
+    while (all->is_in_fight == true && sfRenderWindow_isOpen(all->window)) {
+        //combat en 3d
+        main_battle_3d(all->window, event, all);
     }
 }
 
@@ -24,8 +22,11 @@ int main(void)
     sfEvent event;
     ALL all;
     set_up(&all);
-    sfRenderWindow_setFramerateLimit(all.window, 60);
-    game_loop(all.window, event, &all);
-    sfRenderWindow_destroy(all.window);
-    return EXIT_SUCCESS;
+
+    all.is_in_fight = true;
+
+    while (sfRenderWindow_isOpen(all.window)) {
+        game_loop(event, &all);
+    }
+    return 0;
 }

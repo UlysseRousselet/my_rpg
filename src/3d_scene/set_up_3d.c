@@ -47,13 +47,30 @@ void create_vertices(Env_3d *env)
 void create_line(Env_3d *env_3d)
 {
     for (int i = 0; i < 2; i++) {
-        env_3d->plateform[i] = sfConvexShape_create();
+        env_3d->plateform[i] = sfConvexShape_create(); 
         sfConvexShape_setPointCount(env_3d->plateform[i], 12);
         sfConvexShape_setOutlineColor(env_3d->plateform[i], sfWhite);
-        sfConvexShape_setOutlineThickness(env_3d->plateform[i], 0);
+        sfConvexShape_setOutlineThickness(env_3d->plateform[i], 1);
         sfTexture *texture = sfTexture_createFromFile("assets/ground.jpg", NULL);
         sfConvexShape_setTexture(env_3d->plateform[i], texture, sfTrue);
     }
+}
+
+void set_up_skybox(Env_3d *env)
+{
+    env->sky_box = sfConvexShape_create();
+    sfConvexShape_setPointCount(env->sky_box, 4);
+    env->sky_box_size.x = 0;
+    env->sky_box_size.y = 0;
+    sfConvexShape_setPoint(env->sky_box, 0, env->sky_box_size);
+    env->sky_box_size.x = 1920;
+    sfConvexShape_setPoint(env->sky_box, 1, env->sky_box_size);
+    env->sky_box_size.y = 540;
+    sfConvexShape_setPoint(env->sky_box, 2, env->sky_box_size);
+    env->sky_box_size.x = 0;
+    sfConvexShape_setPoint(env->sky_box, 3, env->sky_box_size);
+    sfColor sky_box_color = {50, 50, 50, 255};
+    sfConvexShape_setFillColor(env->sky_box, sky_box_color);
 }
 
 void set_up_3d_scene(ALL *all)
@@ -75,16 +92,9 @@ void set_up_3d_scene(ALL *all)
     camera->monter = 0;
     camera->descendre = 0;
     env->camera = camera;
-    env->middle_of_screen.x = 960;
-    env->middle_of_screen.y = 540;
-    env->sky_box = sfRectangleShape_create();
-    env->sky_box_size.x = 0;
-    env->sky_box_size.y = 0;
-    sfRectangleShape_setPosition(env->sky_box, env->sky_box_size);
-    env->sky_box_size.x = 1920;
-    env->sky_box_size.y = 540;
-    sfColor sky_box_color = {100, 100, 100, 255};
-    sfRectangleShape_setFillColor(env->sky_box, sky_box_color);
+    env->middle_of_screen.x = MIDSCREENX;
+    env->middle_of_screen.y = MIDSCREENY;
+    set_up_skybox(env);
     create_vertices(env);
     create_line(env);
     all->env_3d = env;

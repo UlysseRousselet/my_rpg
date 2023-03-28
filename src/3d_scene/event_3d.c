@@ -87,8 +87,8 @@ void event_fct(sfRenderWindow *window, sfEvent event, Env_3d *env)
             }
         }
         if (event.type == sfEvtMouseMoved) {
-            env->camera->angle_horiz -= (float)(event.mouseMove.x - env->middle_of_screen.x) / env->camera->sensivity;
-            env->camera->angle_vertic -= (float)(event.mouseMove.y - env->middle_of_screen.y) / env->camera->sensivity;
+            env->camera->angle_horiz -= (float)(event.mouseMove.x - MIDSCREENX) / env->camera->sensivity;
+            env->camera->angle_vertic -= (float)(event.mouseMove.y - MIDSCREENY) / env->camera->sensivity;
             if (env->camera->angle_horiz > 360)
                 env->camera->angle_horiz = 0;
             if (env->camera->angle_horiz < 0)

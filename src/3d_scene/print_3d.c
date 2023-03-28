@@ -9,9 +9,12 @@
 
 void print_skybox(Env_3d *env, sfRenderWindow *window)
 {
-    env->sky_box_size.y = env->camera->angle_vertic + 540;
-    sfRectangleShape_setScale(env->sky_box, env->sky_box_size);
-    sfRenderWindow_drawRectangleShape(window, env->sky_box, NULL);
+    env->sky_box_size.x = 1920;
+    env->sky_box_size.y = sin(env->camera->angle_vertic * (PI / 180)) * 1080 + 540;
+    sfConvexShape_setPoint(env->sky_box, 2, env->sky_box_size);
+    env->sky_box_size.x = 0;
+    sfConvexShape_setPoint(env->sky_box, 3, env->sky_box_size);
+    sfRenderWindow_drawConvexShape(window, env->sky_box, NULL);
 }
 
 void print_3D(Env_3d *env, sfRenderWindow *window)
